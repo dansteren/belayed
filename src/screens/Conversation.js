@@ -17,6 +17,7 @@ export default class Conversation extends React.Component {
       ]
     };
   }
+
   componentWillMount() {
     this.fetchData(this.props.match.params.threadId);
   }
@@ -43,7 +44,9 @@ export default class Conversation extends React.Component {
   }
 
   async fetchData(threadId) {
-    const { participants, messages } = await entangledb.query(threadId);
+    const { participants, messages } = await entangledb.getConversation(
+      threadId
+    );
     this.setState({ participants, messages });
   }
 }
