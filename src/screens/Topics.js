@@ -2,13 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Route, Link } from "react-router-native";
 
-// export default class Topics extends React.Component {
-//   render() {
-//     return <Text style={styles.header}>HomeScreen</Text>;
-//   }
-// }
-
-
 const Topic = ({ match }) => (
   <Text style={styles.topic}>{match.params.topicId}</Text>
 );
@@ -17,6 +10,13 @@ const Topics = ({ match }) => (
   <View>
     <Text style={styles.header}>Topics</Text>
     <View>
+      <Link
+        to="/conversation/001"
+        style={styles.subNavItem}
+        underlayColor="#f0f4f7"
+      >
+        <Text>Conversation 001</Text>
+      </Link>
       <Link
         to={`${match.url}/rendering`}
         style={styles.subNavItem}
@@ -39,11 +39,11 @@ const Topics = ({ match }) => (
         <Text>Props v. State</Text>
       </Link>
       <Link
-        to="/conversation"
+        to="/conversation/002"
         style={styles.subNavItem}
         underlayColor="#f0f4f7"
       >
-        <Text>GO TO CONVERSATION</Text>
+        <Text>Conversation 2</Text>
       </Link>
     </View>
 

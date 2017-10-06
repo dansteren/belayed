@@ -21,12 +21,12 @@ const TabButtons = ({ match }) => (
       <Text>Climbs</Text>
     </Link>
     <Link
-      to={`${match.url}/topics`}
+      to={`${match.url}/inbox`}
       replace={true}
       underlayColor="#f0f4f7"
       style={styles.navItem}
     >
-      <Text>Topics</Text>
+      <Text>Inbox</Text>
     </Link>
     <Link
       to={`${match.url}/profile`}
@@ -44,7 +44,7 @@ export default TabButtons;
 const styles = StyleSheet.create({
   nav: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-around"
   },
   navItem: {
     flex: 1,
