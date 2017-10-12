@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { formatTime } from "../utils";
+import Avatar from "./Avatar";
 
 const Message = ({ sender, timeSent, text, children, outbound }) => (
   <View style={styles.messageContainer}>
@@ -13,10 +14,11 @@ const Message = ({ sender, timeSent, text, children, outbound }) => (
       </View>
     ) : (
       <View>
-        <View style={styles.inboundMessage}>
-          <Text style={styles.inboundMessageText}>
-            {sender || ""}: {text || children}
-          </Text>
+        <View style={styles.messageAndAvatar}>
+          <Avatar text={sender} />
+          <View style={styles.inboundMessage}>
+            <Text style={styles.inboundMessageText}>{text || children}</Text>
+          </View>
         </View>
         <Text style={styles.timeIn}>{formatTime(timeSent)}</Text>
       </View>
@@ -49,6 +51,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     borderRadius: 20,
     padding: 10
+  },
+  messageAndAvatar: {
+    flexDirection: "row",
+    alignItems: "center"
   },
   inboundMessageText: {
     fontSize: 16,

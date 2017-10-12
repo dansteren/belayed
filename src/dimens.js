@@ -1,1 +1,1 @@
-export const statusBarHeight = 25;
+export const statusBarHeight = 24;

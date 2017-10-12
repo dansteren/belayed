@@ -1,16 +1,24 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { statusBarHeight } from "../dimens";
 
 export default class Profile extends React.Component {
   render() {
     return (
-      <Text style={styles.header}>Profile</Text>
+      <View style={styles.page}>
+        <Text style={styles.header}>Profile</Text>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  page: {
+    backgroundColor: "lightblue",
+    flexGrow: 1,
+    marginTop: statusBarHeight
+  },
   header: {
-    fontSize: 20,
+    fontSize: 20
   }
 });

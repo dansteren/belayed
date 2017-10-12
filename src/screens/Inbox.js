@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Link } from "react-router-native";
-import { InboxItem } from "../components";
+import { InboxItem, AppBar } from "../components";
 import * as entangledb from "../services/entangledb";
 
 export default class Inbox extends React.Component {
@@ -18,8 +18,8 @@ export default class Inbox extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text style={styles.header}>Inbox</Text>
+      <View style={styles.page}>
+        <AppBar>Inbox</AppBar>
         <View>
           {this.state.conversations.map(c => (
             <InboxItem key={c.id} conversation={c} />
@@ -36,6 +36,9 @@ export default class Inbox extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  page: {
+    flexGrow: 1
+  },
   header: {
     fontSize: 20
   }

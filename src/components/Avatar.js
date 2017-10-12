@@ -13,11 +13,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 40,
     width: 40,
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "#CF5300",
     alignItems: "center",
     justifyContent: "center"
   },
   avatarText: {
-    fontSize: 26
+    fontSize: 26,
+    color: "#FFFFFF"
   }
 });

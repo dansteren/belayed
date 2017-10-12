@@ -1,14 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { AppBar } from "../components";
 
 export default class Explore extends React.Component {
   render() {
     return (
       <View style={styles.page}>
-        <Text style={styles.header}>Explore</Text>
+        <AppBar>Explore</AppBar>
         <Text>
-          This screen will have all the climbs that are available.
-          You will be able to filter based on day, time, and location.
+          This screen will have all the climbs that are available. You will be
+          able to filter based on day, time, and location.
         </Text>
       </View>
     );
@@ -17,9 +18,7 @@ export default class Explore extends React.Component {
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "#FF0000"
-  },
-  header: {
-    fontSize: 20,
+    backgroundColor: "#FFFFFF",
+    flexGrow: 1
   }
 });

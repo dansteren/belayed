@@ -26,19 +26,21 @@ export default class Conversation extends React.Component {
     const m = this.state.messages[0];
     const self = "You";
     return (
-      <View style={styles.messageContainer}>
+      <View style={styles.page}>
         <AppBar>{this.state.participants[0]}</AppBar>
-        {this.state.messages.map(m => {
-          return (
-            <Message
-              key={m.timeSent}
-              sender={m.sender}
-              timeSent={m.timeSent}
-              text={m.text}
-              outbound={m.sender === self}
-            />
-          );
-        })}
+        <View style={styles.messages}>
+          {this.state.messages.map(m => {
+            return (
+              <Message
+                key={m.timeSent}
+                sender={m.sender}
+                timeSent={m.timeSent}
+                text={m.text}
+                outbound={m.sender === self}
+              />
+            );
+          })}
+        </View>
       </View>
     );
   }
@@ -52,7 +54,12 @@ export default class Conversation extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  messageContainer: {
-    backgroundColor: "#EEEEEE"
+  page: {
+    backgroundColor: "#EEEEEE",
+    flexGrow: 1
+  },
+  messages: {
+    flexGrow: 1,
+    justifyContent: "flex-end"
   }
 });

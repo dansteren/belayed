@@ -1,16 +1,24 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { AppBar } from "../components";
 
 export default class ClimbsScreen extends React.Component {
   render() {
     return (
-      <Text style={styles.header}>Climbs</Text>
+      <View style={styles.page}>
+        <AppBar>Climbs</AppBar>
+        <Text>
+          This screen will have all the climbs that are available. You will be
+          able to filter based on day, time, and location.
+        </Text>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  header: {
-    fontSize: 20,
+  page: {
+    backgroundColor: "#FFFFFF",
+    flexGrow: 1
   }
 });
