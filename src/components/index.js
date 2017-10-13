@@ -3,3 +3,4 @@ export { default as Avatar } from "./Avatar";
 export { default as InboxItem } from "./InboxItem";
 export { default as Message } from "./Message";
 export { default as BottomNavigation } from "./BottomNavigation";
+export { default as ClimbingOp } from "./ClimbingOp";

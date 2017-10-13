@@ -7,10 +7,13 @@ export default class ClimbsScreen extends React.Component {
     return (
       <View style={styles.page}>
         <AppBar>Climbs</AppBar>
-        <Text>
-          This screen will have all the climbs that are available. You will be
-          able to filter based on day, time, and location.
-        </Text>
+        <View style={styles.body}>
+          <Text>
+            This screen will have all climbs related to you. This includes
+            upcoming climbs that you want to go on as well as climbs that you
+            have gone on in the past
+          </Text>
+        </View>
       </View>
     );
   }
@@ -20,5 +23,12 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: "#FFFFFF",
     flexGrow: 1
+  },
+  body: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+    flexGrow: 1,
+    padding: 16
   }
 });

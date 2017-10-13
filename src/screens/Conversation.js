@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import * as entangledb from "../services/entangledb";
 import { AppBar, Message } from "../components";
 
@@ -7,19 +7,19 @@ export default class Conversation extends React.Component {
   constructor() {
     super();
     this.state = {
-      participants: ["no", "one"],
-      messages: [
-        {
-          sender: "Fake Person",
-          timeSent: 1507249095704,
-          text: "Loading messages..."
-        }
-      ]
+      participants: [],
+      messages: []
     };
   }
 
   componentWillMount() {
     this.fetchData(this.props.match.params.threadId);
+  }
+
+  componentDidMount() {
+    if (this.flatList) {
+      this.flatList.scrollToEnd({ animated: true }); // TODO: Doesn't work
+    }
   }
 
   render() {
@@ -28,19 +28,28 @@ export default class Conversation extends React.Component {
     return (
       <View style={styles.page}>
         <AppBar>{this.state.participants[0]}</AppBar>
-        <View style={styles.messages}>
-          {this.state.messages.map(m => {
-            return (
-              <Message
-                key={m.timeSent}
-                sender={m.sender}
-                timeSent={m.timeSent}
-                text={m.text}
-                outbound={m.sender === self}
-              />
-            );
+        <FlatList
+          style={{ flex: 1 }}
+          ref={r => {
+            this.flatList = r;
+          }}
+          contentContainerStyle={styles.messages}
+          data={this.state.messages}
+          getItemLayout={(data, index) => ({
+            length: 60,
+            offset: 80 * index,
+            index
           })}
-        </View>
+          keyExtractor={(item, index) => item.timeSent}
+          renderItem={({ item }) => (
+            <Message
+              sender={item.sender}
+              timeSent={item.timeSent}
+              text={item.text}
+              outbound={item.sender === self}
+            />
+          )}
+        />
       </View>
     );
   }

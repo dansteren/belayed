@@ -5,12 +5,10 @@ import { Link } from "react-router-native";
 import { statusBarHeight } from "../dimens";
 
 const AppBar = ({ children }) => (
-  <View>
-    <View style={styles.appBar}>
-      <Link to="/home/explore">
-        <Text style={styles.appBarText}>{children}</Text>
-      </Link>
-    </View>
+  <View style={styles.appBar}>
+    <Link to="/home/explore">
+      <Text style={styles.appBarText}>{children}</Text>
+    </Link>
   </View>
 );
 export default AppBar;
@@ -22,10 +20,10 @@ const styles = StyleSheet.create({
     elevation: 4
   },
   appBarText: {
-    fontSize: 24,
+    fontSize: 20,
     color: primaryTextColor,
-    margin: 0,
     marginTop: 14 + statusBarHeight,
+    marginBottom: 4,
     // marginLeft: 72 //Change this once we add a left icon
     marginLeft: 24
   }

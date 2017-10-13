@@ -19,7 +19,8 @@ const mockConversations = [
       {
         sender: "You",
         timeSent: 1507249095704,
-        text: "Do you want to go climbing"
+        text:
+          "Do you want to go climbing? I was thinking this saturday would be a good time. What do you think?"
       },
       { sender: "You", timeSent: 1507250105704, text: "I can bring the gear" },
       {
@@ -36,6 +37,41 @@ const mockConversations = [
         sender: "Best Friend",
         timeSent: 1507253135704,
         text: "Sounds good! :)"
+      },
+      {
+        sender: "You",
+        timeSent: 1507353135704,
+        text: ":)"
+      },
+      {
+        sender: "Best Friend",
+        timeSent: 1507453135704,
+        text: ":) :)"
+      },
+      {
+        sender: "You",
+        timeSent: 1507553135704,
+        text: "uh..."
+      },
+      {
+        sender: "Best Friend",
+        timeSent: 1507653135704,
+        text: ":D"
+      },
+      {
+        sender: "You",
+        timeSent: 1507753135704,
+        text: "Did I miss something? You're starting to freak me out"
+      },
+      {
+        sender: "Best Friend",
+        timeSent: 1507853135704,
+        text: "alkjfahsdlfkjahsdfk"
+      },
+      {
+        sender: "You",
+        timeSent: 1507953135704,
+        text: "Nevermind, the whole things off."
       }
     ]
   },
