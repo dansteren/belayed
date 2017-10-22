@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import { AppBar, ClimbingOp } from "../components";
-import { opportunities } from "../services/api";
+import { AppBar, ClimbingOp, HorizontalList } from "../components";
+import { weekdays } from "../services/api";
 
 export default class Explore extends React.Component {
   render() {
@@ -10,8 +10,10 @@ export default class Explore extends React.Component {
         <AppBar>Explore</AppBar>
         <FlatList
           style={{ flex: 1 }}
-          data={opportunities}
-          renderItem={({ item }) => <ClimbingOp op={item} />}
+          data={weekdays}
+          renderItem={({ item }) => (
+            <HorizontalList title={item.day} data={item.people} />
+          )}
         />
       </View>
     );

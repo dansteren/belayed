@@ -238,3 +238,108 @@ export const opportunities = [
     time: "EVENING"
   }
 ];
+
+export const weekdays = [
+  {
+    key: "0011",
+    day: "Monday 10/16",
+    people: [
+      {
+        key: "0001",
+        name: "First Person",
+        grade: "5.8 - 5.11a",
+        hasGear: false
+      },
+      {
+        key: "0002",
+        name: "Second Person",
+        grade: "5.11c - 5.12a",
+        hasGear: true
+      },
+      {
+        key: "0003",
+        name: "Third Person",
+        grade: "5.6 - 5.7",
+        hasGear: false
+      },
+      {
+        key: "0004",
+        name: "Four Person",
+        grade: "5.7 - 5.8",
+        hasGear: true
+      },
+      {
+        key: "0005",
+        name: "Five Person",
+        grade: "5.9 - 5.10d",
+        hasGear: false
+      },
+      {
+        key: "0006",
+        name: "Six Person",
+        grade: "5.6 - 5.11",
+        hasGear: true
+      }
+    ]
+  },
+  {
+    key: "0022",
+    day: "Tuesday 10/17",
+    people: [
+      {
+        key: "0004",
+        name: "Four Person",
+        grade: "5.7 - 5.8",
+        hasGear: true
+      },
+      {
+        key: "0005",
+        name: "Five Person",
+        grade: "5.9 - 5.10d",
+        hasGear: false
+      },
+      {
+        key: "0006",
+        name: "Six Person",
+        grade: "5.6 - 5.11",
+        hasGear: true
+      }
+    ]
+  },
+  {
+    key: "0033",
+    day: "Wednesday 10/18",
+    people: [
+      {
+        key: "0095",
+        name: "Four Person",
+        grade: "5.7 - 5.8",
+        hasGear: true
+      },
+      {
+        key: "0096",
+        name: "Five Person",
+        grade: "5.9 - 5.10d",
+        hasGear: false
+      },
+      {
+        key: "00097",
+        name: "Six Person",
+        grade: "5.6 - 5.11",
+        hasGear: true
+      }
+    ]
+  },
+  {
+    key: "0044",
+    day: "Thursday 10/19",
+    people: [
+      {
+        key: "0095",
+        name: "Four Person",
+        grade: "5.7 - 5.8",
+        hasGear: true
+      }
+    ]
+  }
+];
