@@ -1,13 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import { AppBar, ClimbingOp, HorizontalList } from "../components";
+import { SearchBar, ClimbingOp, HorizontalList } from "../components";
 import { weekdays } from "../services/api";
 
 export default class Explore extends React.Component {
   render() {
     return (
       <View style={styles.page}>
-        <AppBar>Explore</AppBar>
+        <SearchBar linkTo="/filter" text="Anywhere" />
         <FlatList
           style={{ flex: 1 }}
           data={weekdays}

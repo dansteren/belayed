@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { ProfileCard } from "../components";
+import { textDark, grey200, grey700 } from "../theme";
 
 const HorizontalList = ({ title, data }) => (
   <View style={styles.horizontalList}>
@@ -21,7 +22,7 @@ export default HorizontalList;
 
 const styles = StyleSheet.create({
   horizontalList: {
-    backgroundColor: "#EEEEEE",
+    backgroundColor: grey200,
     paddingTop: 10,
     paddingBottom: 10
   },
@@ -32,7 +33,11 @@ const styles = StyleSheet.create({
     paddingRight: 24,
     alignItems: "center"
   },
+  seeAll: {
+    color: grey700
+  },
   title: {
+    color: textDark,
     fontSize: 20,
     fontWeight: "bold"
   },
