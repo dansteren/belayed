@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Link } from "react-router-native";
+import { YDSGrade } from "../utils";
 
 const ProfileCard = ({ person }) => (
   <Link to={`/user/${person.id}`}>
@@ -8,8 +9,12 @@ const ProfileCard = ({ person }) => (
       <View style={styles.imagePlaceHolder} />
       <View style={styles.cardFooter}>
         <View style={styles.cardFooterText}>
-          <Text>{person.name}</Text>
-          <Text>{person.grade}</Text>
+          <Text>{person.firstName + " " + person.lastName}</Text>
+          <Text>
+            {YDSGrade[person.outdoorGrade] +
+              " - " +
+              YDSGrade[person.indoorGrade]}
+          </Text>
         </View>
         <View>
           <View style={styles.gearIconPlaceHolder} />

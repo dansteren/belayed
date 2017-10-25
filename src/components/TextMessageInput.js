@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity
+} from "react-native";
 import { grey500, bluegrey400, bluegrey700, clear } from "../theme";
 
 export default class TextMessageInput extends React.Component {
@@ -27,7 +33,7 @@ export default class TextMessageInput extends React.Component {
             autoCapitalize="sentences"
             autoGrow={true}
             multiline={true}
-            onChangeText={text => this.props.onChangeText({ text })}
+            onChangeText={text => this.props.onChangeText(text)}
             placeholder="Type a message"
             placeholderTextColor={bluegrey700}
             returnKeyType="send"
@@ -36,15 +42,19 @@ export default class TextMessageInput extends React.Component {
               height: this.state.height
             }}
             underlineColorAndroid={clear}
-            value={this.state.newMessage}
+            value={this.props.value}
             onContentSizeChange={e =>
               this.setState({ height: e.nativeEvent.contentSize.height })}
           />
         </View>
-        <View style={styles.sendIconPlaceHolderContainer}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => this.props.onSendClick()}
+          style={styles.sendIconPlaceHolderContainer}
+        >
           <View style={styles.sendIconPlaceHolder} />
           <Text style={styles.send}>SEND</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }

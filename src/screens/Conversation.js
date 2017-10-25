@@ -60,7 +60,9 @@ export default class Conversation extends React.Component {
           )}
         />
         <TextMessageInput
+          value={this.state.newMessage}
           onChangeText={newMessage => this.setState({ newMessage })}
+          onSendClick={() => this.sendMessage()}
         />
       </KeyboardAvoidingView>
     );
@@ -71,6 +73,22 @@ export default class Conversation extends React.Component {
       threadId
     );
     this.setState({ participants, messages });
+  }
+
+  sendMessage() {
+    if (this.state.newMessage) {
+      this.setState({
+        messages: [
+          ...this.state.messages,
+          {
+            sender: "You",
+            timeSent: Date.now(),
+            text: this.state.newMessage
+          }
+        ],
+        newMessage: ""
+      });
+    }
   }
 }
 

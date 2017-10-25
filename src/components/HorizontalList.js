@@ -7,10 +7,11 @@ const HorizontalList = ({ title, data }) => (
   <View style={styles.horizontalList}>
     <View style={styles.heading}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.seeAll}>See All ></Text>
+      {/* <Text style={styles.seeAll}>See All ></Text> */}
     </View>
     <FlatList
       horizontal
+      keyExtractor={item => item.id}
       showsHorizontalScrollIndicator={false}
       style={styles.cardContainer}
       data={data}
