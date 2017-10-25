@@ -2,10 +2,9 @@ import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import { statusBarHeight } from "../dimens";
 import {
-  primaryColor,
   accentColor,
   accentColorDark,
-  textLight,
+  primaryTextLight,
   clear
 } from "../theme";
 
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
     paddingBottom: 8
   },
   searchIconPlaceHolder: {
-    backgroundColor: "#616161",
+    backgroundColor: primaryTextLight,
     height: 24,
     width: 24,
     marginLeft: 16
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
   appBarText: {
     backgroundColor: accentColor,
     borderRadius: 4,
-    color: textLight,
+    color: primaryTextLight,
     flexGrow: 1,
     fontSize: 16,
     marginLeft: 16,

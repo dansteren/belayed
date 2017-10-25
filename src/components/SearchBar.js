@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Link } from "react-router-native";
 import { statusBarHeight } from "../dimens";
-import { accentColor, accentColorDark, textLight } from "../theme";
+import { accentColor, accentColorDark, primaryTextLight } from "../theme";
 
 const SearchBar = ({ linkTo, text }) => (
   <View style={styles.searchBar}>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   searchIconPlaceHolder: {
     width: 24,
     height: 24,
-    backgroundColor: "#616161",
+    backgroundColor: primaryTextLight,
     borderRadius: 12
   },
   appBarText: {
@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     marginLeft: 16,
     marginRight: 8,
-    color: textLight
+    color: primaryTextLight
   }
 });

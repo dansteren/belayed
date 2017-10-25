@@ -242,7 +242,7 @@ export const opportunities = [
 export const weekdays = [
   {
     key: "0011",
-    day: "Monday 10/16",
+    day: "Tuesday 10/24",
     people: [
       {
         key: "0001",
@@ -284,7 +284,7 @@ export const weekdays = [
   },
   {
     key: "0022",
-    day: "Tuesday 10/17",
+    day: "Wednesday 10/25",
     people: [
       {
         key: "0004",
@@ -308,7 +308,7 @@ export const weekdays = [
   },
   {
     key: "0033",
-    day: "Wednesday 10/18",
+    day: "Thursday 10/25",
     people: [
       {
         key: "0095",
@@ -332,7 +332,7 @@ export const weekdays = [
   },
   {
     key: "0044",
-    day: "Thursday 10/19",
+    day: "Friday 10/26",
     people: [
       {
         key: "0095",

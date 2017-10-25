@@ -7,7 +7,7 @@ import {
   Redirect,
   AndroidBackButton
 } from "react-router-native";
-import { Conversation, Tabs, Filter } from "./src/screens";
+import { Conversation, Tabs, Filter, BuddyProfile } from "./src/screens";
 
 const Redirector = () => (
   <View>
@@ -23,6 +23,7 @@ const App = () => (
           <Route exact path="/" component={Redirector} />
           <Route path="/home" component={Tabs} />
           <Route path="/filter" component={Filter} />
+          <Route path="/user/:userId" component={BuddyProfile} />
           <Route path="/conversation/:threadId" component={Conversation} />
         </View>
       </View>

@@ -4,7 +4,7 @@ import { Route } from "react-router-native";
 import { Explore, Climbs, Inbox, Profile } from "./index";
 import { BottomNavigation } from "../components";
 
-const Tabs = ({ match }) => (
+const Tabs = ({ match, location }) => (
   <View style={styles.page}>
     <View style={{ flexGrow: 1 }}>
       <Route path={`${match.url}/explore`} component={Explore} />
@@ -12,7 +12,7 @@ const Tabs = ({ match }) => (
       <Route path={`${match.url}/inbox`} component={Inbox} />
       <Route path={`${match.url}/profile`} component={Profile} />
     </View>
-    <BottomNavigation match={match} />
+    <BottomNavigation match={match} location={location} />
   </View>
 );
 

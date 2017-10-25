@@ -5,6 +5,8 @@ export { default as Message } from "./Message";
 export { default as BottomNavigation } from "./BottomNavigation";
 export { default as ClimbingOp } from "./ClimbingOp";
 export { default as HorizontalList } from "./HorizontalList";
+export { default as LocationRow } from "./LocationRow";
 export { default as ProfileCard } from "./ProfileCard";
 export { default as SearchBar } from "./SearchBar";
 export { default as SearchBox } from "./SearchBox";
+export { default as TextMessageInput } from "./TextMessageInput";

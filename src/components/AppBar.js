@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { primaryColor, primaryTextColor } from "../theme";
+import { primaryColor, primaryTextLight } from "../theme";
 import { Link } from "react-router-native";
 import { statusBarHeight } from "../dimens";
 
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   appBarText: {
     fontSize: 20,
-    color: primaryTextColor,
+    color: primaryTextLight,
     marginTop: 14 + statusBarHeight,
     marginBottom: 4,
     // marginLeft: 72 //Change this once we add a left icon

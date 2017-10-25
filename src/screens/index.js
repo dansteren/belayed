@@ -1,3 +1,4 @@
+export { default as BuddyProfile } from "./BuddyProfile";
 export { default as Climbs } from "./Climbs";
 export { default as Conversation } from "./Conversation";
 export { default as Explore } from "./Explore";

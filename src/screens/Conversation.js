@@ -1,14 +1,23 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TextInput,
+  KeyboardAvoidingView
+} from "react-native";
 import * as entangledb from "../services/entangledb";
-import { AppBar, Message } from "../components";
+import { AppBar, Message, TextMessageInput } from "../components";
+import { grey500, bluegrey50, clear } from "../theme";
 
 export default class Conversation extends React.Component {
   constructor() {
     super();
     this.state = {
       participants: [],
-      messages: []
+      messages: [],
+      newMessage: ""
     };
   }
 
@@ -26,7 +35,7 @@ export default class Conversation extends React.Component {
     const m = this.state.messages[0];
     const self = "You";
     return (
-      <View style={styles.page}>
+      <KeyboardAvoidingView style={styles.page} behavior="padding">
         <AppBar>{this.state.participants[0]}</AppBar>
         <FlatList
           style={{ flex: 1 }}
@@ -50,7 +59,10 @@ export default class Conversation extends React.Component {
             />
           )}
         />
-      </View>
+        <TextMessageInput
+          onChangeText={newMessage => this.setState({ newMessage })}
+        />
+      </KeyboardAvoidingView>
     );
   }
 
@@ -64,7 +76,7 @@ export default class Conversation extends React.Component {
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "#EEEEEE",
+    backgroundColor: bluegrey50,
     flexGrow: 1
   },
   messages: {

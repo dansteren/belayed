@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { ProfileCard } from "../components";
-import { textDark, grey200, grey700 } from "../theme";
+import { primaryTextDark, grey200, grey700 } from "../theme";
 
 const HorizontalList = ({ title, data }) => (
   <View style={styles.horizontalList}>
@@ -22,7 +22,6 @@ export default HorizontalList;
 
 const styles = StyleSheet.create({
   horizontalList: {
-    backgroundColor: grey200,
     paddingTop: 10,
     paddingBottom: 10
   },
@@ -37,12 +36,12 @@ const styles = StyleSheet.create({
     color: grey700
   },
   title: {
-    color: textDark,
+    color: primaryTextDark,
     fontSize: 20,
     fontWeight: "bold"
   },
   cardContainer: {
-    flex: 1,
-    paddingLeft: 20
+    flex: 1
+    // paddingLeft: 20 //Doesn't let the rightmost card scroll all the way on screen
   }
 });

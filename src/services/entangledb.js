@@ -18,59 +18,59 @@ const mockConversations = [
     messages: [
       {
         sender: "You",
-        timeSent: 1507249095704,
+        timeSent: 1507646812000,
         text:
           "Do you want to go climbing? I was thinking this saturday would be a good time. What do you think?"
       },
-      { sender: "You", timeSent: 1507250105704, text: "I can bring the gear" },
+      { sender: "You", timeSent: 1508501940000, text: "I can bring the gear" },
       {
         sender: "Best Friend",
-        timeSent: 1507251758591,
+        timeSent: 1508502900000,
         text: "Yeah, what time were you thinking?"
       },
       {
         sender: "You",
-        timeSent: 1507252125704,
+        timeSent: 1508503320000,
         text: "How bout this saturday?"
       },
       {
         sender: "Best Friend",
-        timeSent: 1507253135704,
+        timeSent: 1508503440000,
         text: "Sounds good! :)"
       },
       {
         sender: "You",
-        timeSent: 1507353135704,
+        timeSent: 1508503500000,
         text: ":)"
       },
       {
         sender: "Best Friend",
-        timeSent: 1507453135704,
+        timeSent: 1508504460000,
         text: ":) :)"
       },
       {
         sender: "You",
-        timeSent: 1507553135704,
+        timeSent: 1508505840000,
         text: "uh..."
       },
       {
         sender: "Best Friend",
-        timeSent: 1507653135704,
+        timeSent: 1508507220000,
         text: ":D"
       },
       {
         sender: "You",
-        timeSent: 1507753135704,
+        timeSent: 1508508780000,
         text: "Did I miss something? You're starting to freak me out"
       },
       {
         sender: "Best Friend",
-        timeSent: 1507853135704,
+        timeSent: 1508508900000,
         text: "alkjfahsdlfkjahsdfk"
       },
       {
         sender: "You",
-        timeSent: 1507953135704,
+        timeSent: 1508899987921,
         text: "Nevermind, the whole things off."
       }
     ]
@@ -81,12 +81,12 @@ const mockConversations = [
     messages: [
       {
         sender: "You",
-        timeSent: 1507254095704,
+        timeSent: 1508510700000,
         text: "I don't have much to say to you"
       },
-      { sender: "You", timeSent: 1507255105704, text: "me neither" },
-      { sender: "Other Guy", timeSent: 1507256115704, text: "Ok, bye!" },
-      { sender: "You", timeSent: 1507257125704, text: "See ya!" }
+      { sender: "Other Guy", timeSent: 1508510760000, text: "me neither" },
+      { sender: "You", timeSent: 1508510784000, text: "Ok, bye!" },
+      { sender: "Other Guy", timeSent: 1508510812000, text: "See ya!" }
     ]
   }
 ];
@@ -110,4 +110,30 @@ export async function query(query) {
 
 export async function getConversation(id) {
   return mockConversations.filter(c => c.id === id)[0];
+}
+
+export async function getUser(userId) {
+  return {
+    id: userId,
+    createdAt: 123456789123,
+    updatedAt: 123456789123,
+    firstName: "Tanner",
+    lastName: "Ellsworth",
+    indoorGrade: "ELEVEN_B",
+    outdoorGrade: "NINE",
+    hasRope: false,
+    hasBelayDevice: false,
+    hasQuickdraws: false,
+    hasRunners: false,
+    hasChalk: false,
+    hasHarness: true,
+    hasShoes: true,
+    hasHelmet: false,
+    preferredArea: {
+      name: "Rock Canyon"
+    },
+    preferredGym: {
+      name: "The Quarry"
+    }
+  };
 }
