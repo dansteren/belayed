@@ -11,12 +11,6 @@ const BottomNavigation = ({ match, location }) => (
         <Text style={styles.textInactive}>Explore</Text>
       </View>
     </Link>
-    <Link to={`${match.url}/climbs`} replace={true} style={styles.navItem}>
-      <View style={styles.navItemBox}>
-        <View style={styles.iconPlaceholderInactive} />
-        <Text style={styles.textInactive}>Climbs</Text>
-      </View>
-    </Link>
     <Link to={`${match.url}/inbox`} replace={true} style={styles.navItem}>
       <View style={styles.navItemBox}>
         <View style={styles.iconPlaceholderInactive} />
