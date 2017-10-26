@@ -15,6 +15,12 @@ export const primaryTextDark = opacity87("#000000");
 export const secondaryTextDark = opacity54("#000000");
 export const disabledTextDark = opacity38("#000000");
 
+export const iconDarkActive = opacity54("#000000");
+export const iconDarkInactive = opacity38("#000000");
+
+export const iconLightActive = "#FFFFFF";
+export const iconLightInactive = opacity50("#FFFFFF");
+
 export const grey50 = "#FAFAFA";
 export const grey100 = "#F5F5F5";
 export const grey200 = "#EEEEEE";

@@ -4,26 +4,19 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity,
-  Image
+  TouchableOpacity
 } from "react-native";
 import { Link, withRouter } from "react-router-native";
-import { statusBarHeight } from "../dimens";
-import {
-  primaryTextDark,
-  primaryTextLight,
-  primaryColor,
-  grey500,
-  grey700
-} from "../theme";
+import { ProfileInfo } from "../components";
+import { primaryTextLight, primaryColor } from "../theme";
 import * as entangledb from "../services/entangledb";
-import { YDSGrade, mapAsync } from "../utils";
+import { mapAsync } from "../utils";
 
 export default class BuddyProfile extends React.Component {
   constructor() {
     super();
     this.state = {
-      person: {}
+      user: {}
     };
   }
 
@@ -32,7 +25,7 @@ export default class BuddyProfile extends React.Component {
   }
 
   render() {
-    const { person } = this.state;
+    const { user } = this.state;
     const FooterButton = withRouter(({ history }) => (
       <TouchableOpacity
         activeOpacity={1}
@@ -46,13 +39,13 @@ export default class BuddyProfile extends React.Component {
             }
           );
           const convsWithUser = conversations.filter(conv => {
-            return conv.participants.indexOf(person.id) !== -1;
+            return conv.participants.indexOf(user.id) !== -1;
           });
           if (convsWithUser.length === 0) {
             // This is first contact.
             const newConvId = await entangledb.createConversation([
               currentUserId,
-              person.id
+              user.id
             ]);
             history.push(`/conversation/${newConvId}`);
           } else {
@@ -69,50 +62,7 @@ export default class BuddyProfile extends React.Component {
     return (
       <View style={styles.page}>
         <ScrollView style={{ flexGrow: 1, marginBottom: 56 }}>
-          <View style={styles.bannerImagePlaceholder}>
-            <Image
-              style={styles.bannerImage}
-              source={{ uri: person.bannerUrl }}
-            />
-          </View>
-          <View style={styles.profileImagePlaceholder}>
-            <Image
-              style={styles.profileImage}
-              source={{ uri: person.pictureUrl }}
-            />
-          </View>
-          <View style={styles.content}>
-            <Text style={styles.header}>
-              {person.firstName + " " + person.lastName}
-            </Text>
-            <View style={styles.section}>
-              <Text style={styles.subheader}>About</Text>
-              <Text>
-                {person.about ||
-                  "This person has not yet provided a personal description"}
-              </Text>
-            </View>
-            <View style={styles.section}>
-              <Text style={styles.subheader}>Gear</Text>
-              <Text>{"Has rope: " + person.hasRope}</Text>
-              <Text>{"Has belay device: " + person.hasBelayDevice}</Text>
-              <Text>{"Has quickdraws: " + person.hasQuickdraws}</Text>
-              <Text>{"Has runners: " + person.hasRunners}</Text>
-              <Text>{"Has chalk: " + person.hasChalk}</Text>
-              <Text>{"Has harness: " + person.hasHarness}</Text>
-              <Text>{"Has shoes: " + person.hasShoes}</Text>
-              <Text>{"Has helmet: " + person.hasHelmet}</Text>
-            </View>
-            <View style={styles.section}>
-              <Text style={styles.subheader}>Skill</Text>
-              <Text>{"Indoor Grade: " + YDSGrade[person.indoorGrade]}</Text>
-              <Text>{"Outdoor Grade: " + YDSGrade[person.outdoorGrade]}</Text>
-            </View>
-            <View style={styles.section}>
-              <Text style={styles.subheader}>Stats</Text>
-              <Text>{"Verified Climbs: " + person.verifiedClimbs}</Text>
-            </View>
-          </View>
+          <ProfileInfo user={user} />
         </ScrollView>
         <FooterButton />
       </View>
@@ -120,8 +70,8 @@ export default class BuddyProfile extends React.Component {
   }
 
   async fetchData(userId) {
-    const person = await entangledb.getUser(userId);
-    this.setState({ person });
+    const user = await entangledb.getUser(userId);
+    this.setState({ user });
   }
 }
 
@@ -129,42 +79,6 @@ const styles = StyleSheet.create({
   page: {
     display: "flex",
     flexDirection: "column"
-  },
-  bannerImagePlaceholder: {
-    backgroundColor: grey700,
-    height: 200
-  },
-  bannerImage: {
-    height: 200
-  },
-  profileImagePlaceholder: {
-    backgroundColor: grey500,
-    alignSelf: "center",
-    elevation: 4,
-    height: 150,
-    width: 150,
-    position: "absolute",
-    top: 125,
-    borderRadius: 75
-  },
-  profileImage: {
-    height: 150,
-    width: 150,
-    borderRadius: 75
-  },
-  content: {
-    paddingTop: 75
-  },
-  header: {
-    fontSize: 32,
-    alignSelf: "center",
-    color: primaryTextDark
-  },
-  subheader: {
-    fontSize: 18
-  },
-  section: {
-    padding: 16
   },
   bottomButton: {
     backgroundColor: primaryColor,
