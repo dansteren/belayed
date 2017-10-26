@@ -4,20 +4,21 @@ import { Link } from "react-router-native";
 import { Avatar } from "../components";
 import { formatTime } from "../utils";
 
-const InboxItem = ({ conversation }) => (
+const InboxItem = ({ contactName, contactImage, threadId, messages }) => (
   <View style={styles.inboxItemRow}>
-    <Avatar text={conversation.participants[0]} />
-    <Link to={`/conversation/${conversation.id}`} style={styles.inboxItem}>
+    <Avatar text={contactName} imageUrl={contactImage} />
+    <Link to={`/conversation/${threadId}`} style={styles.inboxItem}>
       <View>
-        <Text style={styles.name}>{conversation.participants[0]}</Text>
+        <Text style={styles.name}>{contactName}</Text>
         <Text>
-          {conversation.messages[conversation.messages.length - 1].text ||
-            "New Conversation"}
+          {messages.length > 0
+            ? messages[messages.length - 1].text
+            : "New Conversation"}
         </Text>
         <Text style={styles.time}>
-          {formatTime(
-            conversation.messages[conversation.messages.length - 1].timeSent
-          )}
+          {messages.length > 0
+            ? formatTime(messages[messages.length - 1].timeSent)
+            : "Tap to Start"}
         </Text>
       </View>
     </Link>

@@ -1,15 +1,20 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { Link } from "react-router-native";
 import { YDSGrade } from "../utils";
 
 const ProfileCard = ({ person }) => (
   <Link to={`/user/${person.id}`}>
     <View style={styles.profileCard}>
-      <View style={styles.imagePlaceHolder} />
+      <Image
+        style={styles.imagePlaceHolder}
+        source={{ uri: person.pictureUrl }}
+      />
       <View style={styles.cardFooter}>
         <View style={styles.cardFooterText}>
-          <Text>{person.firstName + " " + person.lastName}</Text>
+          <Text ellipsizeMode="tail" numberOfLines={1}>
+            {person.firstName + " " + person.lastName}
+          </Text>
           <Text>
             {YDSGrade[person.outdoorGrade] +
               " - " +
@@ -39,6 +44,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 2
   },
   cardFooter: {
+    width: 150,
     backgroundColor: "white",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -47,7 +53,8 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 2
   },
   cardFooterText: {
-    flexDirection: "column"
+    flexDirection: "column",
+    width: 150 - 5 - 5 - 24 - 5
   },
   gearIconPlaceHolder: {
     height: 24,

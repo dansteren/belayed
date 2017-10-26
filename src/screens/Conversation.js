@@ -10,12 +10,14 @@ import {
 import * as entangledb from "../services/entangledb";
 import { AppBar, Message, TextMessageInput } from "../components";
 import { grey500, bluegrey50, clear } from "../theme";
+import { mapAsync } from "../utils";
 
 export default class Conversation extends React.Component {
   constructor() {
     super();
     this.state = {
-      participants: [],
+      sender: {},
+      receiver: {},
       messages: [],
       newMessage: ""
     };
@@ -32,18 +34,17 @@ export default class Conversation extends React.Component {
   }
 
   render() {
-    const m = this.state.messages[0];
-    const self = "You";
+    const { sender, receiver, messages, newMessage } = this.state;
     return (
       <KeyboardAvoidingView style={styles.page} behavior="padding">
-        <AppBar>{this.state.participants[0]}</AppBar>
+        <AppBar>{receiver.firstName + " " + receiver.lastName}</AppBar>
         <FlatList
           style={{ flex: 1 }}
           ref={r => {
             this.flatList = r;
           }}
           contentContainerStyle={styles.messages}
-          data={this.state.messages}
+          data={messages}
           getItemLayout={(data, index) => ({
             length: 60,
             offset: 80 * index,
@@ -55,12 +56,12 @@ export default class Conversation extends React.Component {
               sender={item.sender}
               timeSent={item.timeSent}
               text={item.text}
-              outbound={item.sender === self}
+              outbound={item.sender === sender.id}
             />
           )}
         />
         <TextMessageInput
-          value={this.state.newMessage}
+          value={newMessage}
           onChangeText={newMessage => this.setState({ newMessage })}
           onSendClick={() => this.sendMessage()}
         />
@@ -69,23 +70,37 @@ export default class Conversation extends React.Component {
   }
 
   async fetchData(threadId) {
+    const currentUserId = await entangledb.getCurrentUserId();
     const { participants, messages } = await entangledb.getConversation(
       threadId
     );
-    this.setState({ participants, messages });
+    const actualParticipants = await mapAsync(participants, async userId => {
+      return await entangledb.getUser(userId);
+    });
+    const sender =
+      actualParticipants[0].id === currentUserId
+        ? actualParticipants[0]
+        : actualParticipants[1];
+    const receiver =
+      actualParticipants[0].id !== currentUserId
+        ? actualParticipants[0]
+        : actualParticipants[1];
+    this.setState({
+      sender,
+      receiver,
+      messages
+    });
   }
 
-  sendMessage() {
+  async sendMessage() {
     if (this.state.newMessage) {
+      const newMessage = await entangledb.sendMessage(
+        this.state.newMessage,
+        this.props.match.params.threadId
+      );
+      const messages = [...this.state.messages, newMessage];
       this.setState({
-        messages: [
-          ...this.state.messages,
-          {
-            sender: "You",
-            timeSent: Date.now(),
-            text: this.state.newMessage
-          }
-        ],
+        messages,
         newMessage: ""
       });
     }

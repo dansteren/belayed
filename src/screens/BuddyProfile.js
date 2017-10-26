@@ -1,6 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import { Link } from "react-router-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Image
+} from "react-native";
+import { Link, withRouter } from "react-router-native";
 import { statusBarHeight } from "../dimens";
 import {
   primaryTextDark,
@@ -10,7 +17,7 @@ import {
   grey700
 } from "../theme";
 import * as entangledb from "../services/entangledb";
-import { YDSGrade } from "../utils";
+import { YDSGrade, mapAsync } from "../utils";
 
 export default class BuddyProfile extends React.Component {
   constructor() {
@@ -25,60 +32,89 @@ export default class BuddyProfile extends React.Component {
   }
 
   render() {
+    const { person } = this.state;
+    const FooterButton = withRouter(({ history }) => (
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={async () => {
+          const currentUserId = await entangledb.getCurrentUserId();
+          const currentUser = await entangledb.getUser(currentUserId);
+          const conversations = await mapAsync(
+            currentUser.conversations,
+            async convId => {
+              return await entangledb.getConversation(convId);
+            }
+          );
+          const convsWithUser = conversations.filter(conv => {
+            return conv.participants.indexOf(person.id) !== -1;
+          });
+          if (convsWithUser.length === 0) {
+            // This is first contact.
+            const newConvId = await entangledb.createConversation([
+              currentUserId,
+              person.id
+            ]);
+            history.push(`/conversation/${newConvId}`);
+          } else {
+            // We already started a conversation with them.
+            const existingConversation = convsWithUser[0];
+            history.push(`/conversation/${existingConversation.id}`);
+          }
+        }}
+        style={styles.bottomButton}
+      >
+        <Text style={styles.buttonText}>START CHATTING</Text>
+      </TouchableOpacity>
+    ));
     return (
       <View style={styles.page}>
         <ScrollView style={{ flexGrow: 1, marginBottom: 56 }}>
-          <View style={styles.bannerImagePlaceholder} />
-          <View style={styles.profileImagePlaceholder} />
+          <View style={styles.bannerImagePlaceholder}>
+            <Image
+              style={styles.bannerImage}
+              source={{ uri: person.bannerUrl }}
+            />
+          </View>
+          <View style={styles.profileImagePlaceholder}>
+            <Image
+              style={styles.profileImage}
+              source={{ uri: person.pictureUrl }}
+            />
+          </View>
           <View style={styles.content}>
             <Text style={styles.header}>
-              {this.state.person.firstName + " " + this.state.person.lastName}
+              {person.firstName + " " + person.lastName}
             </Text>
             <View style={styles.section}>
               <Text style={styles.subheader}>About</Text>
               <Text>
-                {this.state.person.about ||
+                {person.about ||
                   "This person has not yet provided a personal description"}
               </Text>
             </View>
             <View style={styles.section}>
               <Text style={styles.subheader}>Gear</Text>
-              <Text>{"Has rope: " + this.state.person.hasRope}</Text>
-              <Text>
-                {"Has belay device: " + this.state.person.hasBelayDevice}
-              </Text>
-              <Text>
-                {"Has quickdraws: " + this.state.person.hasQuickdraws}
-              </Text>
-              <Text>{"Has runners: " + this.state.person.hasRunners}</Text>
-              <Text>{"Has chalk: " + this.state.person.hasChalk}</Text>
-              <Text>{"Has harness: " + this.state.person.hasHarness}</Text>
-              <Text>{"Has shoes: " + this.state.person.hasShoes}</Text>
-              <Text>{"Has helmet: " + this.state.person.hasHelmet}</Text>
+              <Text>{"Has rope: " + person.hasRope}</Text>
+              <Text>{"Has belay device: " + person.hasBelayDevice}</Text>
+              <Text>{"Has quickdraws: " + person.hasQuickdraws}</Text>
+              <Text>{"Has runners: " + person.hasRunners}</Text>
+              <Text>{"Has chalk: " + person.hasChalk}</Text>
+              <Text>{"Has harness: " + person.hasHarness}</Text>
+              <Text>{"Has shoes: " + person.hasShoes}</Text>
+              <Text>{"Has helmet: " + person.hasHelmet}</Text>
             </View>
             <View style={styles.section}>
               <Text style={styles.subheader}>Skill</Text>
-              <Text>
-                {"Indoor Grade: " + YDSGrade[this.state.person.indoorGrade]}
-              </Text>
-              <Text>
-                {"Outdoor Grade: " + YDSGrade[this.state.person.outdoorGrade]}
-              </Text>
+              <Text>{"Indoor Grade: " + YDSGrade[person.indoorGrade]}</Text>
+              <Text>{"Outdoor Grade: " + YDSGrade[person.outdoorGrade]}</Text>
             </View>
             <View style={styles.section}>
               <Text style={styles.subheader}>Stats</Text>
-              <Text>
-                {"Verified Climbs: " + this.state.person.verifiedClimbs}
-              </Text>
+              <Text>{"Verified Climbs: " + person.verifiedClimbs}</Text>
             </View>
           </View>
         </ScrollView>
-        <Link
-          to={`/conversation/${this.state.person.id}`}
-          style={styles.bottomButton}
-        >
-          <Text style={styles.buttonText}>START CHATTING</Text>
-        </Link>
+        <FooterButton />
       </View>
     );
   }
@@ -98,6 +134,9 @@ const styles = StyleSheet.create({
     backgroundColor: grey700,
     height: 200
   },
+  bannerImage: {
+    height: 200
+  },
   profileImagePlaceholder: {
     backgroundColor: grey500,
     alignSelf: "center",
@@ -106,6 +145,11 @@ const styles = StyleSheet.create({
     width: 150,
     position: "absolute",
     top: 125,
+    borderRadius: 75
+  },
+  profileImage: {
+    height: 150,
+    width: 150,
     borderRadius: 75
   },
   content: {

@@ -23,10 +23,10 @@ export const weekdays = [
   },
   {
     day: "Saturday",
-    people: [person1, person4]
+    people: [person1, person4, person3, person5, person2, person6]
   },
   {
     day: "Sunday",
-    people: [person4]
+    people: [person5]
   }
 ];

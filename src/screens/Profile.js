@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
 import { statusBarHeight } from "../dimens";
 import {
   primaryTextDark,
@@ -27,8 +27,15 @@ export default class Profile extends React.Component {
     const { user } = this.state;
     return (
       <ScrollView style={styles.page}>
-        <View style={styles.bannerImagePlaceholder} />
-        <View style={styles.profileImagePlaceholder} />
+        <View style={styles.bannerImagePlaceholder}>
+          <Image style={styles.bannerImage} source={{ uri: user.bannerUrl }} />
+        </View>
+        <View style={styles.profileImagePlaceholder}>
+          <Image
+            style={styles.profileImage}
+            source={{ uri: user.pictureUrl }}
+          />
+        </View>
         <View style={styles.content}>
           <Text style={styles.header}>
             {user.firstName + " " + user.lastName}
@@ -80,6 +87,9 @@ const styles = StyleSheet.create({
     backgroundColor: grey700,
     height: 200
   },
+  bannerImage: {
+    height: 200
+  },
   profileImagePlaceholder: {
     backgroundColor: grey500,
     alignSelf: "center",
@@ -88,6 +98,11 @@ const styles = StyleSheet.create({
     width: 150,
     position: "absolute",
     top: 125,
+    borderRadius: 75
+  },
+  profileImage: {
+    height: 150,
+    width: 150,
     borderRadius: 75
   },
   content: {
