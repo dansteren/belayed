@@ -53,7 +53,16 @@ export default class Conversation extends React.Component {
           keyExtractor={(item, index) => item.timeSent}
           renderItem={({ item }) => (
             <Message
-              sender={item.sender}
+              senderName={
+                item.sender === sender.id
+                  ? sender.firstName + " " + sender.lastName
+                  : receiver.firstName + " " + receiver.lastName
+              }
+              senderImage={
+                item.sender === sender.id
+                  ? sender.pictureUrl
+                  : receiver.pictureUrl
+              }
               timeSent={item.timeSent}
               text={item.text}
               outbound={item.sender === sender.id}

@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { formatTime } from "../utils";
+
 import Avatar from "./Avatar";
+import {
+  primaryTextDark,
+  primaryTextLight,
+  grey500,
+  bluegrey600
+} from "../theme";
+import { formatTime } from "../utils";
 
 // interface Props {
-//   sender: string;
+//   senderName: string;
+//   senderImage: string;
 //   timeSent: string;
 //   text: string;
 //   children: any
@@ -20,7 +28,14 @@ export default class Message extends Component {
   }
 
   render() {
-    const { sender, timeSent, text, children, outbound } = this.props;
+    const {
+      senderName,
+      senderImage,
+      timeSent,
+      text,
+      children,
+      outbound
+    } = this.props;
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -30,7 +45,7 @@ export default class Message extends Component {
         {outbound ? (
           <View style={styles.outboundMessageContainer}>
             <View style={styles.outboundMessage}>
-              <Text style={styles.text}>{text || children}</Text>
+              <Text style={styles.outboundMessageText}>{text || children}</Text>
             </View>
             {this.state.expanded && (
               <Text style={styles.timeOut}>{formatTime(timeSent)}</Text>
@@ -39,7 +54,7 @@ export default class Message extends Component {
         ) : (
           <View>
             <View style={styles.messageAndAvatar}>
-              <Avatar text={sender} />
+              <Avatar text={senderName} imageUrl={senderImage} />
               <View style={styles.inboundMessage}>
                 <Text style={styles.inboundMessageText}>
                   {text || children}
@@ -73,7 +88,7 @@ const styles = StyleSheet.create({
     marginLeft: 100
   },
   inboundMessage: {
-    backgroundColor: "#CF5300",
+    backgroundColor: grey500,
     marginRight: 100,
     marginLeft: 10,
     borderRadius: 18,
@@ -85,22 +100,20 @@ const styles = StyleSheet.create({
   },
   inboundMessageText: {
     fontSize: 16,
-    color: "#FFFFFF"
+    color: primaryTextLight
   },
-  text: {
-    fontSize: 16
+  outboundMessageText: {
+    fontSize: 16,
+    color: primaryTextDark
   },
   timeOut: {
     fontSize: 12,
     marginRight: 10,
-    color: "#546E7A"
+    color: bluegrey600
   },
   timeIn: {
     fontSize: 12,
     marginLeft: 40 + 10 + 10,
-    color: "#546E7A"
-  },
-  sender: {
-    fontSize: 12
+    color: bluegrey600
   }
 });
