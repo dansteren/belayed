@@ -6,9 +6,7 @@ import { statusBarHeight } from "../dimens";
 
 const AppBar = ({ children }) => (
   <View style={styles.appBar}>
-    <Link to="/home/explore">
-      <Text style={styles.appBarText}>{children}</Text>
-    </Link>
+    <Text style={styles.appBarText}>{children}</Text>
   </View>
 );
 export default AppBar;

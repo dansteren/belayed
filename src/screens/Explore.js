@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import { SearchBar, ClimbingOp, HorizontalList } from "../components";
+import { AppBar, ClimbingOp, HorizontalList } from "../components";
 import * as entangledb from "../services/entangledb";
 
 export default class Explore extends React.Component {
@@ -18,7 +18,7 @@ export default class Explore extends React.Component {
   render() {
     return (
       <View style={styles.page}>
-        <SearchBar linkTo="/filter" text="Anywhere" />
+        <AppBar>Explore</AppBar>
         <FlatList
           style={{ flex: 1 }}
           keyExtractor={item => item.day}
